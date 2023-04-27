@@ -1,0 +1,42 @@
+plugins {
+    id 'java'
+}
+
+group 'eu.raidersheaven'
+version '1.19_R2'
+
+
+libsDirName = "F:/JetBrains/RHForceResourcePack"
+compileJava.options.encoding = "UTF-8"
+
+sourceCompatibility = targetCompatibility = 1.8
+
+repositories {
+    maven {
+        url = 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/'
+        content {
+            includeGroup 'org.bukkit'
+            includeGroup 'org.spigotmc'
+        }
+    }
+    maven { url = 'https://oss.sonatype.org/content/repositories/snapshots' }
+    maven { url = 'https://oss.sonatype.org/content/repositories/central' }
+
+    mavenCentral()
+    mavenLocal()
+}
+
+configurations {
+    exportedLibs
+}
+
+dependencies {
+    compileOnly 'org.spigotmc:spigot-api:1.19.4-R0.1-SNAPSHOT'
+    configurations.implementation.extendsFrom(configurations.exportedLibs)
+}
+
+jar {
+    from {
+        configurations.exportedLibs.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}

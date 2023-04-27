@@ -1,0 +1,21 @@
+name: RHForceResourcePack
+author: X0R3
+version: 1.19_R2
+website: https://raidersheaven.eu/
+main: eu.raidersheaven.rhforceresourcepack.main.Main
+api-version: 1.13
+commands:
+  resourcepack:
+    description: Main command
+    aliases: [frp, rp]
+permissions:
+  rhfrp.*:
+    default: op
+  rhfrp.skip:
+    default: false
+  rhfrp.reload:
+    default: op
+  rhfrp.resend:
+    default: op
+  rhfrp.resendall:
+    default: op
