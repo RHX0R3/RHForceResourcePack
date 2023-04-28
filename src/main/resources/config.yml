@@ -39,6 +39,7 @@ messages:
   console-deny: '%prefix% &7Player &e%player% &7denied the resourcepack enforcement'
   console-kick: '%prefix% &7Player &e%player% &7has been kicked'
   console-skip: '%prefix% &7Player &e%player% &7skipped the resourcepack enforcement'
+  console-fail: '%prefix% &7Player &e%player% &7couldn''t load the resourepack. Please check your configuration!'
   optional:
     pack-loaded:
       enabled: true

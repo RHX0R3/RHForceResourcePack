@@ -3,7 +3,7 @@ plugins {
 }
 
 group 'eu.raidersheaven'
-version '1.19_R2'
+version '1.19_R3'
 
 
 libsDirName = "F:/JetBrains/RHForceResourcePack"

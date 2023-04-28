@@ -49,9 +49,8 @@ public class ResourcepackEvents implements Listener {
 
     }
 
-
     @EventHandler
-    public void resourcepackStatus(final PlayerResourcePackStatusEvent e) {
+    public void resourcePackStatus(final PlayerResourcePackStatusEvent e) {
 
         final Player p = e.getPlayer();
         FileConfiguration configuration = Main.getInstance().getConfig();
@@ -59,44 +58,10 @@ public class ResourcepackEvents implements Listener {
         String consoleSkipped = Objects.requireNonNull(HexColor.format(configuration.getString("messages.console-skip"))).replace("%player%", p.getName()).replace("%prefix%", prefix);
         String consoleAccepted = Objects.requireNonNull(HexColor.format(configuration.getString("messages.console-accept"))).replace("%player%", p.getName()).replace("%prefix%", prefix);
         String consoleDenied = Objects.requireNonNull(HexColor.format(configuration.getString("messages.console-deny"))).replace("%player%", p.getName()).replace("%prefix%", prefix);
+        String consoleFail = Objects.requireNonNull(HexColor.format(configuration.getString("messages.console-fail"))).replace("%player%", p.getName()).replace("%prefix%", prefix);
 
-        if (e.getStatus() == PlayerResourcePackStatusEvent.Status.SUCCESSFULLY_LOADED) {
 
-            if (packLoadedEnabled) {
-
-                p.sendMessage(packLoaded);
-
-            }
-
-        } else if (e.getStatus() == PlayerResourcePackStatusEvent.Status.DECLINED && kickEnabled && !skipEnabled || (!PlayerUtils.havePermission(p, "RHFRP.skip"))) {
-
-            Bukkit.getConsoleSender().sendMessage(consoleDenied);
-            p.sendMessage(packDenied);
-
-            Bukkit.getScheduler().scheduleSyncDelayedTask(Main.plugin, () -> {
-
-                PlayerUtils.soundDeny(p);
-
-            }, (soundsDelay <= 0) ? 1 : soundsDelay);
-
-            Bukkit.getScheduler().scheduleSyncDelayedTask(Main.plugin, () -> {
-
-                p.kickPlayer(ChatColor.translateAlternateColorCodes('&', playerKicked));
-                Bukkit.getConsoleSender().sendMessage(consoleKicked);
-
-            }, 20L * kickDelay);
-
-        } else if (e.getStatus() == PlayerResourcePackStatusEvent.Status.DECLINED) {
-
-            if (kickEnabled && skipEnabled && (PlayerUtils.havePermission(p, "RHFRP.skip"))) {
-
-                Bukkit.getConsoleSender().sendMessage(consoleSkipped);
-                p.sendMessage(packSkipped);
-                PlayerUtils.soundAccept(p);
-
-            }
-
-        } else if (e.getStatus() == PlayerResourcePackStatusEvent.Status.ACCEPTED) {
+        if (e.getStatus() == PlayerResourcePackStatusEvent.Status.ACCEPTED) {
 
             Bukkit.getConsoleSender().sendMessage(consoleAccepted);
             p.sendMessage(packAccepted);
@@ -106,6 +71,74 @@ public class ResourcepackEvents implements Listener {
                 PlayerUtils.soundAccept(p);
 
             }, (soundsDelay <= 0) ? 1 : soundsDelay);
+
+        } else if (e.getStatus() == PlayerResourcePackStatusEvent.Status.FAILED_DOWNLOAD) {
+
+            Bukkit.getConsoleSender().sendMessage(consoleFail);
+
+            Bukkit.getScheduler().scheduleSyncDelayedTask(Main.plugin, () -> {
+
+                PlayerUtils.soundDeny(p);
+
+            }, (soundsDelay <= 0) ? 1 : soundsDelay);
+
+        } else if (e.getStatus() == PlayerResourcePackStatusEvent.Status.SUCCESSFULLY_LOADED) {
+
+            if (packLoadedEnabled) {
+
+                p.sendMessage(packLoaded);
+
+            }
+
+        } else if (e.getStatus() == PlayerResourcePackStatusEvent.Status.DECLINED) {
+
+            if (kickEnabled && skipEnabled && PlayerUtils.havePermission(p, "RHFRP.skip")) {
+
+                Bukkit.getConsoleSender().sendMessage(consoleSkipped);
+                p.sendMessage(packSkipped);
+                PlayerUtils.soundAccept(p);
+
+            } else if (kickEnabled && skipEnabled && (!PlayerUtils.havePermission(p, "RHFRP.skip"))) {
+
+                Bukkit.getConsoleSender().sendMessage(consoleDenied);
+                p.sendMessage(packDenied);
+
+                Bukkit.getScheduler().scheduleSyncDelayedTask(Main.plugin, () -> {
+
+                    PlayerUtils.soundDeny(p);
+
+                }, (soundsDelay <= 0) ? 1 : soundsDelay);
+
+                Bukkit.getScheduler().scheduleSyncDelayedTask(Main.plugin, () -> {
+
+                    p.kickPlayer(ChatColor.translateAlternateColorCodes('&', playerKicked));
+                    Bukkit.getConsoleSender().sendMessage(consoleKicked);
+
+                }, 20L * kickDelay);
+
+            } else if (kickEnabled && !skipEnabled) {
+
+                Bukkit.getConsoleSender().sendMessage(consoleDenied);
+                p.sendMessage(packDenied);
+
+                Bukkit.getScheduler().scheduleSyncDelayedTask(Main.plugin, () -> {
+
+                    PlayerUtils.soundDeny(p);
+
+                }, (soundsDelay <= 0) ? 1 : soundsDelay);
+
+                Bukkit.getScheduler().scheduleSyncDelayedTask(Main.plugin, () -> {
+
+                    p.kickPlayer(ChatColor.translateAlternateColorCodes('&', playerKicked));
+                    Bukkit.getConsoleSender().sendMessage(consoleKicked);
+
+                }, 20L * kickDelay);
+
+            } else if (!kickEnabled && !skipEnabled) {
+
+                // ignore pack denial and do nothing
+
+            }
 
         }
 
