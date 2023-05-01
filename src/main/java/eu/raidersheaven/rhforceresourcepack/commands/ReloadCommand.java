@@ -86,7 +86,7 @@ public class ReloadCommand implements CommandExecutor, TabExecutor {
 
             if (PlayerUtils.havePermission(player, "RHFRP.reload")) {
 
-                l.add("resend");
+                l.add("reload");
 
             }
 
