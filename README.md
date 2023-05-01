@@ -20,7 +20,7 @@ Players who do not accept / download the resource pack can be automatically kick
 VIPs can also be given skipping permission. The entire plugin is configurable!
 
 ## :camera: Preview (kick message)
-![](https://www.spigotmc.org/attachments/screen1-jpg.764803)
+![](https://abload.de/img/screen15zicb.jpg)
 
 ## :ticket: Compatibility
 *supports Spigot and Paper*   
