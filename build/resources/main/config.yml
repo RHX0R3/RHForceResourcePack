@@ -1,0 +1,53 @@
+# RaidersHeaven.eu -- Force Resourcepack
+#    - Minecraft plugin -
+#
+# Configurable forced resourcepack for your server ☄️ Perfect to prevent XRAY resourcepacks!
+
+# Set the resourcepack url for direct download. I recommend using https://mc-packs.net/
+# Check the size of your resourcepack beforehand! See the following table:
+# > 1.18 | 250 MiB
+# < 1.18 | 100 MiB (≈ 100.8 MB)
+# < 1.15 | 50 MiB (≈ 50.4 MB)
+# Note that download success or failure is logged by the client, and not by the server.
+resourcepack-url: 'https://raidersheaven.eu/download/%C2%A7cRHPureAntiXRAYPack_v2.zip'
+
+# Delay before the player gets the resourcepack prompt
+prompt:
+  delay: 4 # ticks
+
+# Kick options
+kick:
+  enabled: true
+  delay: 3 # seconds
+
+# Enable skip permission (rhfrp.skip)
+skip-permission: true
+
+# Message settings; placeholders: %prefix%, %player%
+messages:
+  prefix: '&8[&#813dd8&lR&#9832db&le&#af27dd&ls&#c61ce0&lo&#dd11e2&lu&#f406e5&lr&#f406e5&lc&#dd11e2&le&#c61ce0&lp&#af27dd&la&#9832db&lc&#813dd8&lk&8]'
+  player-kicked: "%prefix%\n\n&7You have been kicked!\n\n&7Please accept the server resourcepack.\n&c&lOtherwise you won't be able to play!\n\n&7Return to your Multiplayer screen, click on &8'&f&lEdit&8' &7and change &8'&f&lServer Resource Packs&8'&7 to &8'&f&lEnabled&8'&7."
+  pack-accepted: '%prefix% &7You''ve accepted the resourcepack. Thank you for playing fair!'
+  pack-denied: '%prefix% &7You''ve denied the resourcepack and will be kicked'
+  pack-resent: '%prefix% &7The resourcepack was resent'
+  pack-skipped: '%prefix% &7You skipped the resourcepack enforcement'
+  reload: '%prefix% &7The configuration has been reloaded'
+  wrong-argument: '%prefix% &7This is not a valid argument'
+  no-permission: '%prefix% &7You don''t have permission'
+  console-no-player: '%prefix% &7You have to be a player to execute this command'
+  console-accept: '%prefix% &7Player &e%player% &7accepted the resourcepack enforcement'
+  console-deny: '%prefix% &7Player &e%player% &7denied the resourcepack enforcement'
+  console-kick: '%prefix% &7Player &e%player% &7has been kicked'
+  console-skip: '%prefix% &7Player &e%player% &7skipped the resourcepack enforcement'
+  console-fail: '%prefix% &7Player &e%player% &7couldn''t load the resourepack. Please check your configuration!'
+  optional:
+    pack-loaded:
+      enabled: true
+      message: '%prefix% &7The resourcepack has downloaded successfully'
+
+# Sound settings
+sounds:
+  enabled: true
+  accept-sound: 'BLOCK_NOTE_BLOCK_BELL'
+  deny-sound: 'BLOCK_BEACON_DEACTIVATE'
+  delay: 4 # ticks
