@@ -16,6 +16,7 @@ import java.util.Objects;
 public class ReloadCommand implements CommandExecutor, TabExecutor {
 
     public ReloadCommand() {
+
         Objects.requireNonNull(Main.getInstance().getCommand("resourcepack")).setTabCompleter(this);
     }
 

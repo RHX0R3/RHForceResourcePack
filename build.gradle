@@ -3,7 +3,7 @@ plugins {
 }
 
 group 'eu.raidersheaven'
-version '1.19_R3'
+version '1.20_R1'
 
 
 libsDirName = "F:/JetBrains/RHForceResourcePack"
@@ -31,7 +31,7 @@ configurations {
 }
 
 dependencies {
-    compileOnly 'org.spigotmc:spigot-api:1.19.4-R0.1-SNAPSHOT'
+    compileOnly 'org.spigotmc:spigot-api:1.20.1-R0.1-SNAPSHOT'
     configurations.implementation.extendsFrom(configurations.exportedLibs)
 }
 

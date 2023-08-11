@@ -11,7 +11,7 @@ public class Main extends JavaPlugin implements Listener {
 
     public static Main plugin;
     public static String name = (ChatColor.DARK_GRAY + "[" + ChatColor.LIGHT_PURPLE + ChatColor.BOLD + "RHForceResourcePack" + ChatColor.DARK_GRAY + "]" + ChatColor.RESET + " ");
-    public static String version = "1.19_R3";
+    public static String version = "1.20_R1";
 
 
     @Override
