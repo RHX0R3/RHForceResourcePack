@@ -26,7 +26,7 @@ VIPs can also be given skipping permission. The entire plugin is configurable!
 *supports Spigot and Paper*   
 
 **API version:**   1.13   
-**Spigot version:**   1.9 1.10 1.11 1.12 1.13 1.14 1.15 1.16 1.17 1.18 1.19   
+**Spigot version:**   1.9 1.10 1.11 1.12 1.13 1.14 1.15 1.16 1.17 1.18 1.19 1.20   
 
 The plugin should be working fine on future Minecraft versions, as long as Spigot does not change their API. There will be no support for 1.8 or older!
 
